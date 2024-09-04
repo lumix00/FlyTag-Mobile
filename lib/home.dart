@@ -48,14 +48,18 @@ void _filterData() {
       final matchesQuery = code.contains(query) || status.contains(query) || location.contains(query);
 
       bool matchesStatus;
-      if (_filterStatus == 'All' && query.isEmpty) {
-        matchesStatus = true;
-      } else if (_filterStatus == 'All') {
-        matchesStatus = true;
-      } else if (_filterStatus == 'Active') {
-        matchesStatus = ['in transit', 'delayed', 'checked in'].contains(status);
+      if (_searchController.text.isEmpty) {
+        // Se não houver texto de pesquisa, aplicar filtro de status
+        if (_filterStatus == 'All') {
+          matchesStatus = true;
+        } else if (_filterStatus == 'Active') {
+          matchesStatus = ['in transit', 'delayed', 'checked in'].contains(status);
+        } else {
+          matchesStatus = status == _filterStatus.toLowerCase();
+        }
       } else {
-        matchesStatus = status == _filterStatus.toLowerCase();
+        // Se houver texto de pesquisa, mostrar todas as malas que correspondem à pesquisa
+        matchesStatus = true;
       }
 
       return matchesQuery && matchesStatus;
@@ -65,14 +69,12 @@ void _filterData() {
 
 void _setFilterStatus(String status) {
   setState(() {
-    if (_searchController.text.isEmpty && status == 'All') {
-      _filterStatus = 'All';
-    } else {
-      _filterStatus = status;
-    }
+    _filterStatus = status;
+    // Refiltrar dados após alterar o status
     _filterData();
   });
 }
+
   @override
   void dispose() {
     _searchController.dispose();
