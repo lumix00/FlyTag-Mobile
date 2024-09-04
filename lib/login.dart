@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pi/register.dart';
+import 'package:pi/home.dart';
 
 class Login extends StatefulWidget {
   final String backgroundImage;
@@ -145,7 +146,11 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            _performLogin();
+                            // _performLogin();
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => const Home()),
+                            );
                           },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.red,
