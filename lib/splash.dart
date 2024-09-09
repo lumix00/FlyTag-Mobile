@@ -24,7 +24,7 @@ class _SplashState extends State<Splash> {
             backgroundImage: 'assets/back.png',
           ),
           transitionDuration:
-              Duration(seconds: 0), // Set duration to zero for no animation
+              const Duration(seconds: 0), // Set duration to zero for no animation
         ),
       );
     });
@@ -35,7 +35,7 @@ class _SplashState extends State<Splash> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/back.png'),
           fit: BoxFit.cover,

@@ -6,7 +6,7 @@ import 'package:pi/home.dart';
 class Login extends StatefulWidget {
   final String backgroundImage;
 
-  const Login({required this.backgroundImage});
+  const Login({super.key, required this.backgroundImage});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -153,7 +153,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.red,
+                            backgroundColor: Colors.red,
                             textStyle: const TextStyle(color: Colors.white),
                           ),
                           child: const Padding(
@@ -173,7 +173,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.blue,
+                            backgroundColor: Colors.blue,
                             textStyle: const TextStyle(color: Colors.white),
                           ),
                           child: const Padding(

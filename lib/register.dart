@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 class Register extends StatefulWidget {
   final String backgroundImage;
 
-  const Register({required this.backgroundImage});
+  const Register({super.key, required this.backgroundImage});
 
   @override
   _RegisterState createState() => _RegisterState();
@@ -189,7 +189,7 @@ class _RegisterState extends State<Register>
                           Navigator.pop(context); // Navigate back to login
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.red,
+                          backgroundColor: Colors.red,
                           textStyle: const TextStyle(color: Colors.white),
                         ),
                         child: const Padding(
@@ -202,7 +202,7 @@ class _RegisterState extends State<Register>
                           _performAuthLogic(); // Perform registration logic
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.blue,
+                          backgroundColor: Colors.blue,
                           textStyle: const TextStyle(color: Colors.white),
                         ),
                         child: const Padding(
