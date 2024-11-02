@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
     {"baggage": {"code": "A009", "status": "Checked In", "date": "2024-09-09", "location": "Dallas"}}
   ]
   ''';
-
+  
   late List<dynamic> jsonData;
   List<dynamic> filteredData = [];
   final TextEditingController _searchController = TextEditingController();
@@ -84,9 +84,6 @@ void _setFilterStatus(String status) {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
       body: Column(
         children: [
           Padding(
