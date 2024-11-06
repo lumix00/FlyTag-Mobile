@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pi/register.dart';
 import 'package:pi/home.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Login extends StatefulWidget {
-  final String backgroundImage;
-
-  const Login({super.key, required this.backgroundImage});
-
   @override
   // ignore: library_private_types_in_public_api
   _LoginState createState() => _LoginState();
@@ -69,122 +66,197 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    double buttonWidth = MediaQuery.of(context).size.width * 0.7;
+    double buttonWidth2 = MediaQuery.of(context).size.width * 0.4;
+
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.lightBlueAccent,
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(widget.backgroundImage),
-                fit: BoxFit.cover,
-              ),
+            decoration: const BoxDecoration(
+              color: Color.fromARGB(192, 134, 206, 240),
+            ),
+          ),
+          Positioned(
+            child: SvgPicture.asset(
+              'assets/nuvemBranca.svg',
+              height: MediaQuery.of(context).size.height * 1,
+              fit: BoxFit.contain,
+              color: Color.fromARGB(192, 157, 218, 228),
+            ),
+          ),
+          Positioned(
+            child: SvgPicture.asset(
+              'assets/nuvemSuperior.svg',
+              height: MediaQuery.of(context).size.height * 0.2,
+              // fit: BoxFit.contain,
+              color: Colors.white,
             ),
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: SlideTransition(
-              position: _offsetAnimation,
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.6,
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.8),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Login",
-                      style: TextStyle(
-                        fontSize: 35,
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.7,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: SvgPicture.asset(
+                      'assets/nuvemBranca.svg',
+                      fit: BoxFit.cover,
+                      color: Color.fromARGB(255, 240, 240, 240),
                     ),
-                    const SizedBox(height: 20),
-                    TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        labelText: "Email",
-                        hintText: "Enter your email",
-                        prefixIcon: Icon(Icons.email),
-                        border: OutlineInputBorder(),
-                      ),
-                      onChanged: (String value) {
-                        setState(() {
-                          _emailController.text = value;
-                        });
-                      },
-                      validator: (value) {
-                        return value!.isEmpty ? "Email is empty" : null;
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    TextFormField(
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: "Password",
-                        hintText: "Enter your password",
-                        prefixIcon: Icon(Icons.lock),
-                        border: OutlineInputBorder(),
-                      ),
-                      onChanged: (String value) {
-                        setState(() {
-                          _passwordController.text = value;
-                        });
-                      },
-                      validator: (value) {
-                        return value!.isEmpty ? "Password is empty" : null;
-                      },
-                    ),
-                    const SizedBox(height: 30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            // _performLogin();
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(builder: (context) => const Home()),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
-                            textStyle: const TextStyle(color: Colors.white),
-                          ),
-                          child: const Padding(
-                            padding: EdgeInsets.all(16),
-                            child: Text("Login"),
-                          ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const Spacer(), // Adiciona um espaçamento flexível no topo
+                      const Align(
+                        alignment: Alignment.centerRight,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              "Olá!",
+                              style: TextStyle(
+                                fontSize: 35,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.right,
+                            ),
+                            Text(
+                              "Como deseja acessar?",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Color.fromARGB(255, 100, 100, 100),
+                              ),
+                              textAlign: TextAlign.right,
+                            ),
+                          ],
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Register(
-                                  backgroundImage: widget.backgroundImage,
+                      ),
+                      const SizedBox(height: 30),
+                      Center(
+                        child: Column(
+                          children: [
+                            // Botão de Entrar com Google
+                            SizedBox(
+                              width: buttonWidth,
+                              child: ElevatedButton.icon(
+                                onPressed: () {
+                                  // Implementar login com Google
+                                },
+                                icon: const Icon(Icons.account_circle,
+                                    color: Colors.lightBlue),
+                                label: const Text("Entrar com Google"),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  textStyle:
+                                      const TextStyle(color: Colors.black87),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 20),
                                 ),
                               ),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue,
-                            textStyle: const TextStyle(color: Colors.white),
-                          ),
-                          child: const Padding(
-                            padding: EdgeInsets.all(16),
-                            child: Text("Register"),
-                          ),
+                            ),
+                            const SizedBox(height: 15),
+                            // Botão de Entrar com Apple
+                            SizedBox(
+                              width: buttonWidth,
+                              child: ElevatedButton.icon(
+                                onPressed: () {
+                                  // Implementar login com Apple
+                                },
+                                icon: const Icon(Icons.apple,
+                                    color: Colors.lightBlue),
+                                label: const Text("Entrar com Apple"),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  textStyle:
+                                      const TextStyle(color: Colors.black87),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 20),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 15),
+                            // Botão de Entrar com Microsoft
+                            SizedBox(
+                              width: buttonWidth,
+                              child: ElevatedButton.icon(
+                                onPressed: () {
+                                  // Implementar login com Microsoft
+                                },
+                                icon: const Icon(Icons.account_circle,
+                                    color: Colors.lightBlue),
+                                label: const Text("Entrar com Microsoft"),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  textStyle:
+                                      const TextStyle(color: Colors.black87),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 20),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 15),
+                            // Botão de Entrar com E-mail
+                            SizedBox(
+                              width: buttonWidth,
+                              child: ElevatedButton.icon(
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const Home()),
+                                  );
+                                },
+                                icon: const Icon(Icons.email,
+                                    color: Colors.lightBlue),
+                                label: const Text("Entrar com E-mail"),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white,
+                                  textStyle:
+                                      const TextStyle(color: Colors.black87),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 20),
+                                ),
+                              ),
+                            ),
+                            Padding(padding: const EdgeInsets.only(top: 16.0,bottom: 16.0), child: SizedBox(
+                              width: buttonWidth2,
+                              child: ElevatedButton.icon(
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const Register(
+                                              backgroundImage: '',
+                                            )),
+                                  );
+                                },
+                                icon: const Icon(Icons.email,
+                                    color: Colors.white),
+                                label: const Text("Registrar-se"),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.blue,
+                                  textStyle:
+                                      const TextStyle(color: Colors.white),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 20),
+                                  elevation: 5,
+                                  shadowColor: Colors.black.withOpacity(0.9),
+                                ),
+                              ),
+                            ),
+                            ),
+                            
+                          ],
                         ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),

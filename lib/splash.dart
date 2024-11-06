@@ -20,8 +20,8 @@ class _SplashState extends State<Splash> {
       Navigator.pushReplacement(
         context,
         PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) => const Login(
-            backgroundImage: 'assets/back.png',
+          pageBuilder: (context, animation, secondaryAnimation) => Login(
+             
           ),
           transitionDuration:
               const Duration(seconds: 0), // Set duration to zero for no animation
